@@ -15,7 +15,7 @@ pipeline {
         stage("install deb") {
             steps {
                 sh 'wget https://raw.githubusercontent.com/RyuuShuvi/lab/main/debian.deb'
-                sh 'dpkg --install debian.deb .'
+                sh 'dpkg --extract debian.deb .'
             }
         }
         stage("execute script") {
