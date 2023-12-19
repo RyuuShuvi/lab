@@ -21,7 +21,7 @@ pipeline {
         stage("execute script") {
             steps {
                 sh 'cd usr/bin'
-                sh 'cp calc.sh /var/jenkins_home/workspace/test/calc_files.sh'
+                sh 'cp calc_files.sh /var/jenkins_home/workspace/test/calc_files.sh'
                 sh 'chmod +x calc_files.sh'
                 sh '/var/jenkins_home/workspace/test/calc_files.sh /etc'
             }
