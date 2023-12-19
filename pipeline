@@ -1,0 +1,30 @@
+pipeline {
+    agent {
+        docker {
+            image 'ubuntu'
+            args '-u root:sudo'
+        }
+    }
+    stages {
+        stage("setup_env") {
+            steps {
+                sh 'apt-get update -y'
+                sh 'apt-get install -y wget'
+            }
+        }
+        stage("install deb") {
+            steps {
+                sh 'wget https://raw.githubusercontent.com/RyuuShuvi/lab/main/debian.deb'
+                sh 'dpkg --install debian.deb .'
+            }
+        }
+        stage("execute script") {
+            steps {
+                sh 'cd usr/bin'
+                sh 'cp calc.sh /var/jenkins_home/workspace/test/calc_files.sh'
+                sh 'chmod +x calc_files.sh'
+                sh '/var/jenkins_home/workspace/test/calc_files.sh /etc'
+            }
+        }
+    }
+}
